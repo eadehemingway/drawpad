@@ -47,7 +47,8 @@ const Open = styled.img`
   width: 20px;
   height: 20px;
   left: 10px;
-  top: 0;
+
+  top: 10px;
   transition: transform 0.5s;
   transform: ${({ drawerOpen }) => {
     return drawerOpen ? "rotate(180deg)" : null
@@ -67,9 +68,10 @@ const PanelWrapper = styled.div`
   flex-direction: column;
   position: absolute;
   padding: 0 30px;
+  padding-top: 20px;
   background: white;
   top: 0;
-  border-left: 3px solid grey;
+  border-left: 1px solid lightsteelblue;
   padding-left: 40px;
   transition: right 0.5s;
   ${({ drawerOpen }) => {
@@ -79,6 +81,7 @@ const PanelWrapper = styled.div`
 
 const ClearBtn = styled.button`
   border: 1px solid lightsteelblue;
+  font-family: futura;
   border-radius: 4px;
   cursor: pointer;
   height: 40px;
@@ -87,6 +90,5 @@ const ClearBtn = styled.button`
   background: white;
   color: lightsteelblue;
   outline: none;
-
   margin-top: 20px;
 `

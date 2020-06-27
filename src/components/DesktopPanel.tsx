@@ -49,7 +49,6 @@ const PanelWrapper = styled.div`
   position: absolute;
   right: 30px;
   top: 0;
-  border-left: 1px solid red;
   padding-left: 20px;
   right: 30px;
 `

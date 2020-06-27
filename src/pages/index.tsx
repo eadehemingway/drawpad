@@ -153,6 +153,7 @@ export default function MouseGame2() {
 const Container = styled.div`
   position: relative;
   width: 100%;
+  top: 0;
   @media (max-width: 500px) {
     position: fixed;
   }
@@ -161,7 +162,7 @@ const Container = styled.div`
 const Svg = styled.svg`
   width: 80%;
   margin: auto;
-  height: 700px;
+  height: 95vh;
   border: 10px solid lightsteelblue;
   cursor: ${({ pauseDrawing }) =>
     pauseDrawing ? "default" : `url(${paintbrush}) 0 20, auto`};
