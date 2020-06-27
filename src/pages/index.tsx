@@ -19,8 +19,8 @@ export default function MouseGame2() {
     svg
       .append("text")
       .text("draw on me")
-      .attr("x", 300)
-      .attr("y", 400)
+      .attr("x", 400)
+      .attr("y", 300)
       .attr("font-family", "futura")
       .attr("font-size", 70)
       .attr("opacity", 0.1)
@@ -119,10 +119,18 @@ export default function MouseGame2() {
           decrease={decreaseOpacity}
         />
         <ClearBtn onClick={clear}>clear</ClearBtn>
+        <PStyled>Press space bar to pause/start paintbrush</PStyled>
       </PanelWrapper>
     </Container>
   )
 }
+
+const PStyled = styled.p`
+  margin: 30px 0;
+  font-family: futura;
+  width: 200px;
+  color: lightsteelblue;
+`
 
 const PanelWrapper = styled.div`
   display: flex;
