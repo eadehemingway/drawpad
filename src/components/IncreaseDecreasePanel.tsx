@@ -54,17 +54,18 @@ const Panel = styled.div`
 const PanelScreen = styled.p`
   margin: 1rem;
   padding: 0.5rem;
-  font-size: 30px;
+  font-size: 20px;
   border: 1px solid lightsteelblue;
   width: fit-content;
-  color: lightsteelblue;
+  color: grey;
   margin: auto;
-  font-family: futura;
+  font-family: Major Mono;
   letter-spacing: 2px;
   border-radius: 3px;
 `
 
 const Pstyled = styled.p`
   margin: 10px;
-  font-family: futura;
+  font-family: Major Mono;
+  color: grey;
 `

@@ -47,7 +47,6 @@ const Open = styled.img`
   width: 20px;
   height: 20px;
   left: 10px;
-
   top: 10px;
   transition: transform 0.5s;
   transform: ${({ drawerOpen }) => {
@@ -57,9 +56,9 @@ const Open = styled.img`
 
 const PStyled = styled.p`
   margin: 30px 0;
-  font-family: futura;
+  font-family: Major Mono;
   width: 200px;
-  color: lightsteelblue;
+  color: grey;
 `
 
 const PanelWrapper = styled.div`
@@ -81,14 +80,14 @@ const PanelWrapper = styled.div`
 
 const ClearBtn = styled.button`
   border: 1px solid lightsteelblue;
-  font-family: futura;
+  font-family: Major Mono;
   border-radius: 4px;
   cursor: pointer;
   height: 40px;
   width: 200px;
   font-size: 1rem;
   background: white;
-  color: lightsteelblue;
+  color: grey;
   outline: none;
   margin-top: 20px;
 `

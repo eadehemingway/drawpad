@@ -38,9 +38,9 @@ export default function DesktopPanel({
 
 const PStyled = styled.p`
   margin: 30px 0;
-  font-family: futura;
+  font-family: Major Mono;
   width: 200px;
-  color: lightsteelblue;
+  color: grey;
 `
 
 const PanelWrapper = styled.div`
@@ -61,7 +61,7 @@ const ClearBtn = styled.button`
   width: 200px;
   font-size: 1rem;
   background: white;
-  color: lightsteelblue;
+  color: grey;
   outline: none;
   margin-top: 50px;
 `

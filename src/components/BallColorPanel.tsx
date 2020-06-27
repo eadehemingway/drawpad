@@ -21,7 +21,8 @@ export const BallColorPanel = ({ color, changeColor }) => {
 
 const PStyled = styled.p`
   margin: 10px 20px;
-  font-family: futura;
+  font-family: Major Mono;
+  color: grey;
 `
 
 const Circle = styled.div`

@@ -5,6 +5,7 @@ import styled from "styled-components"
 import paintbrush from "../assets/paintbrush.png"
 import DesktopPanel from "../components/DesktopPanel"
 import MobilePanel from "../components/MobilePanel"
+import "../index.css"
 
 export default function MouseGame2() {
   const [data, setData] = useState([])
@@ -23,9 +24,9 @@ export default function MouseGame2() {
       .text("draw on me")
       .attr("x", "50%")
       .attr("y", "50%")
-      .attr("font-family", "futura")
+      .attr("font-family", "Major Mono")
       .attr("font-size", d => (isDesktop ? 70 : 24))
-      .attr("opacity", 0.1)
+      .attr("opacity", 0.2)
       .attr("text-anchor", "middle")
 
     document.addEventListener("keydown", pauseCircles)
