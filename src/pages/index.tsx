@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import * as d3 from "d3"
-import { BallColorPanel } from "../components/BallColorPanel"
-import { BallSizePanel } from "../components/BallSizePanel"
+import { BallColorPanel } from "../components/BallColorPanel.tsx"
+
 import styled from "styled-components"
-import { BallOpacityPanel } from "../components/BallOpacityPanel"
+import paintbrush from "../assets/paintbrush.png"
+import { IncreaseDecreasePanel } from "../components/IncreaseDecreasePanel"
 
 export default function MouseGame2() {
   const [data, setData] = useState([])
@@ -78,38 +79,48 @@ export default function MouseGame2() {
   }
 
   function increaseRadius() {
+    if (radius === 150) return
     setRadius(radius + 10)
   }
 
   function decreaseRadius() {
+    if (radius === 10) return
     setRadius(radius - 10)
   }
+
   function increaseOpacity() {
-    setOpacity(opacity + 0.1)
+    if (opacity === 1) return
+
+    const newOpacity = opacity + 0.1
+    const roundedOpacity = newOpacity.toFixed(1)
+
+    setOpacity(Number(roundedOpacity))
   }
 
   function decreaseOpacity() {
-    if (opacity < 0.1) return
+    if (opacity === 0.1) return
     const newOpacity = opacity - 0.1
-
-    setOpacity(newOpacity)
+    const roundedOpacity = newOpacity.toFixed(1)
+    setOpacity(Number(roundedOpacity))
   }
 
   return (
     <Container>
-      <Svg onMouseMove={addNode}></Svg>
+      <Svg onMouseMove={addNode} drawCirclesBool={drawCirclesBool}></Svg>
       <ClearBtn onClick={clear}>clear</ClearBtn>
       <PanelWrapper>
         <BallColorPanel color={color} changeColor={setColor} />
-        <BallSizePanel
-          radius={radius}
-          increaseRadius={increaseRadius}
-          decreaseRadius={decreaseRadius}
+        <IncreaseDecreasePanel
+          property={radius}
+          propertyName="Radius"
+          increase={increaseRadius}
+          decrease={decreaseRadius}
         />
-        <BallOpacityPanel
-          opacity={opacity}
-          increaseOpacity={increaseOpacity}
-          decreaseOpacity={decreaseOpacity}
+        <IncreaseDecreasePanel
+          property={opacity}
+          propertyName="Opacity"
+          increase={increaseOpacity}
+          decrease={decreaseOpacity}
         />
       </PanelWrapper>
     </Container>
@@ -118,6 +129,10 @@ export default function MouseGame2() {
 
 const PanelWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 0;
 `
 const Container = styled.div`
   position: relative;
@@ -129,14 +144,15 @@ const Svg = styled.svg`
   margin: auto;
   height: 700px;
   border: 10px solid lightsteelblue;
+  cursor: ${({ drawCirclesBool }) =>
+    drawCirclesBool ? `url(${paintbrush}) 0 20, auto` : "default"};
 `
 const ClearBtn = styled.button`
-  border: 2px solid lightsteelblue;
+  border: 1px solid lightsteelblue;
   border-radius: 4px;
   cursor: pointer;
   height: 40px;
   width: 200px;
-  margin: 1rem;
   font-size: 1rem;
   background: white;
   color: lightsteelblue;

@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 export const BallColorPanel = ({ color, changeColor }) => {
-  const colourDictionary = ["pink", "salmon", "orange", "coral", "blue"]
+  const colourDictionary = ["pink", "salmon", "orange", "coral", "steelblue"]
 
   return (
     <ColorPanel>
@@ -29,6 +29,7 @@ const Circle = styled.div`
   width: 20px;
   border-radius: 50%;
   margin-left: 20px;
+  opacity: 0.5;
 `
 const Color = styled.div`
   display: flex;
@@ -42,7 +43,4 @@ const ColorPanel = styled.div`
   border: 1px solid lightsteelblue;
   border-radius: 2%;
   width: 200px;
-  position: absolute;
-  right: 0;
-  top: 0;
 `
