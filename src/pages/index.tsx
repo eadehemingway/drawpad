@@ -5,6 +5,8 @@ import { BallColorPanel } from "../components/BallColorPanel.tsx"
 import styled from "styled-components"
 import paintbrush from "../assets/paintbrush.png"
 import { IncreaseDecreasePanel } from "../components/IncreaseDecreasePanel"
+import DesktopPanel from "../components/DesktopPanel"
+import MobilePanel from "../components/MobilePanel"
 
 export default function MouseGame2() {
   const [data, setData] = useState([])
@@ -106,24 +108,31 @@ export default function MouseGame2() {
   return (
     <Container>
       <Svg onMouseMove={addNode} pauseDrawing={pauseDrawing}></Svg>
-
-      <PanelWrapper isDesktop={isDesktop}>
-        <BallColorPanel color={color} changeColor={setColor} />
-        <IncreaseDecreasePanel
-          property={radius}
-          propertyName="Radius"
-          increase={increaseRadius}
-          decrease={decreaseRadius}
+      {isDesktop ? (
+        <DesktopPanel
+          color={color}
+          setColor={setColor}
+          radius={radius}
+          increaseRadius={increaseRadius}
+          decreaseOpacity={decreaseOpacity}
+          decreaseRadius={decreaseRadius}
+          increaseOpacity={increaseOpacity}
+          clear={clear}
+          opacity={opacity}
         />
-        <IncreaseDecreasePanel
-          property={opacity}
-          propertyName="Opacity"
-          increase={increaseOpacity}
-          decrease={decreaseOpacity}
+      ) : (
+        <MobilePanel
+          color={color}
+          setColor={setColor}
+          radius={radius}
+          increaseRadius={increaseRadius}
+          decreaseOpacity={decreaseOpacity}
+          decreaseRadius={decreaseRadius}
+          increaseOpacity={increaseOpacity}
+          clear={clear}
+          opacity={opacity}
         />
-        <ClearBtn onClick={clear}>clear</ClearBtn>
-        <PStyled>Press space bar to pause/start paintbrush</PStyled>
-      </PanelWrapper>
+      )}
     </Container>
   )
 }
@@ -141,13 +150,14 @@ const PanelWrapper = styled.div`
   position: absolute;
   right: 30px;
   top: 0;
-
+  border-left: 1px solid red;
+  padding-left: 20px;
   ${({ isDesktop }) => {
     if (isDesktop) {
       return `right: 30px;
     `
     } else {
-      return `right: -200px;
+      return `right: -180px;
     `
     }
   }}
@@ -155,6 +165,9 @@ const PanelWrapper = styled.div`
 const Container = styled.div`
   position: relative;
   width: 100%;
+  @media (max-width: 500px) {
+    position: fixed;
+  }
 `
 
 const Svg = styled.svg`
@@ -164,6 +177,9 @@ const Svg = styled.svg`
   border: 10px solid lightsteelblue;
   cursor: ${({ pauseDrawing }) =>
     pauseDrawing ? "default" : `url(${paintbrush}) 0 20, auto`};
+  @media (max-width: 500px) {
+    height: 95vh;
+  }
 `
 const ClearBtn = styled.button`
   border: 1px solid lightsteelblue;
