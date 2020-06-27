@@ -11,7 +11,7 @@ export default function MouseGame2() {
   const [color, setColor] = useState("coral")
   const [radius, setRadius] = useState(10)
   const [opacity, setOpacity] = useState(0.3)
-  const [drawCirclesBool, setDrawerCirclesBool] = useState(true)
+  const [pauseDrawing, setPauseDrawing] = useState(false)
 
   useEffect(() => {
     const svg = d3.select("svg")
@@ -30,7 +30,7 @@ export default function MouseGame2() {
 
   function pauseCircles(e) {
     if (e.keyCode === 32) {
-      setDrawerCirclesBool(!drawCirclesBool)
+      setPauseDrawing(!pauseDrawing)
     }
   }
 
@@ -40,10 +40,10 @@ export default function MouseGame2() {
 
   useEffect(() => {
     document.addEventListener("keydown", pauseCircles)
-  }, [drawCirclesBool])
+  }, [pauseDrawing])
 
   function addNode(e) {
-    if (!drawCirclesBool) return
+    if (pauseDrawing) return
 
     const newData = [
       ...data,
@@ -53,7 +53,7 @@ export default function MouseGame2() {
   }
 
   function drawCircles() {
-    if (!drawCirclesBool) return
+    if (pauseDrawing) return
 
     const circles = d3
       .select("svg")
@@ -68,8 +68,6 @@ export default function MouseGame2() {
       .attr("r", radius)
       .attr("fill", color)
       .attr("opacity", opacity)
-
-    circles.exit().transition().duration(100).attr("opacity", 0).remove()
   }
 
   function clear() {
@@ -90,10 +88,8 @@ export default function MouseGame2() {
 
   function increaseOpacity() {
     if (opacity === 1) return
-
     const newOpacity = opacity + 0.1
     const roundedOpacity = newOpacity.toFixed(1)
-
     setOpacity(Number(roundedOpacity))
   }
 
@@ -106,8 +102,8 @@ export default function MouseGame2() {
 
   return (
     <Container>
-      <Svg onMouseMove={addNode} drawCirclesBool={drawCirclesBool}></Svg>
-      <ClearBtn onClick={clear}>clear</ClearBtn>
+      <Svg onMouseMove={addNode} pauseDrawing={pauseDrawing}></Svg>
+
       <PanelWrapper>
         <BallColorPanel color={color} changeColor={setColor} />
         <IncreaseDecreasePanel
@@ -122,6 +118,7 @@ export default function MouseGame2() {
           increase={increaseOpacity}
           decrease={decreaseOpacity}
         />
+        <ClearBtn onClick={clear}>clear</ClearBtn>
       </PanelWrapper>
     </Container>
   )
@@ -131,7 +128,7 @@ const PanelWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  right: 0;
+  right: 30px;
   top: 0;
 `
 const Container = styled.div`
@@ -144,8 +141,8 @@ const Svg = styled.svg`
   margin: auto;
   height: 700px;
   border: 10px solid lightsteelblue;
-  cursor: ${({ drawCirclesBool }) =>
-    drawCirclesBool ? `url(${paintbrush}) 0 20, auto` : "default"};
+  cursor: ${({ pauseDrawing }) =>
+    pauseDrawing ? "default" : `url(${paintbrush}) 0 20, auto`};
 `
 const ClearBtn = styled.button`
   border: 1px solid lightsteelblue;
@@ -157,7 +154,5 @@ const ClearBtn = styled.button`
   background: white;
   color: lightsteelblue;
   outline: none;
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  margin-top: 50px;
 `
