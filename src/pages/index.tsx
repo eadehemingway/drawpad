@@ -12,18 +12,21 @@ export default function MouseGame2() {
   const [radius, setRadius] = useState(10)
   const [opacity, setOpacity] = useState(0.3)
   const [pauseDrawing, setPauseDrawing] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
 
   useEffect(() => {
     const svg = d3.select("svg")
-
+    const isDesktop = window.innerWidth > 500
+    setIsDesktop(isDesktop)
     svg
       .append("text")
       .text("draw on me")
-      .attr("x", 400)
-      .attr("y", 300)
+      .attr("x", "50%")
+      .attr("y", "50%")
       .attr("font-family", "futura")
-      .attr("font-size", 70)
+      .attr("font-size", d => (isDesktop ? 70 : 24))
       .attr("opacity", 0.1)
+      .attr("text-anchor", "middle")
 
     document.addEventListener("keydown", pauseCircles)
   }, [])
@@ -104,7 +107,7 @@ export default function MouseGame2() {
     <Container>
       <Svg onMouseMove={addNode} pauseDrawing={pauseDrawing}></Svg>
 
-      <PanelWrapper>
+      <PanelWrapper isDesktop={isDesktop}>
         <BallColorPanel color={color} changeColor={setColor} />
         <IncreaseDecreasePanel
           property={radius}
@@ -138,6 +141,16 @@ const PanelWrapper = styled.div`
   position: absolute;
   right: 30px;
   top: 0;
+
+  ${({ isDesktop }) => {
+    if (isDesktop) {
+      return `right: 30px;
+    `
+    } else {
+      return `right: -200px;
+    `
+    }
+  }}
 `
 const Container = styled.div`
   position: relative;
