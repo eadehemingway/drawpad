@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react"
 import * as d3 from "d3"
-import { BallColorPanel } from "../components/BallColorPanel.tsx"
 
 import styled from "styled-components"
 import paintbrush from "../assets/paintbrush.png"
-import { IncreaseDecreasePanel } from "../components/IncreaseDecreasePanel"
 import DesktopPanel from "../components/DesktopPanel"
 import MobilePanel from "../components/MobilePanel"
 
@@ -53,6 +51,17 @@ export default function MouseGame2() {
     const newData = [
       ...data,
       { id: e.timeStamp, x: e.clientX - 10, y: e.clientY - 10 },
+    ]
+    setData(newData)
+  }
+  function addNodeMobile(e) {
+    const newData = [
+      ...data,
+      {
+        id: e.timeStamp,
+        x: e.touches[0].clientX - 10,
+        y: e.touches[0].clientY - 10,
+      },
     ]
     setData(newData)
   }
@@ -107,7 +116,11 @@ export default function MouseGame2() {
 
   return (
     <Container>
-      <Svg onMouseMove={addNode} pauseDrawing={pauseDrawing}></Svg>
+      <Svg
+        onMouseMove={addNode}
+        onTouchMove={addNodeMobile}
+        pauseDrawing={pauseDrawing}
+      ></Svg>
       {isDesktop ? (
         <DesktopPanel
           color={color}
@@ -137,31 +150,6 @@ export default function MouseGame2() {
   )
 }
 
-const PStyled = styled.p`
-  margin: 30px 0;
-  font-family: futura;
-  width: 200px;
-  color: lightsteelblue;
-`
-
-const PanelWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  right: 30px;
-  top: 0;
-  border-left: 1px solid red;
-  padding-left: 20px;
-  ${({ isDesktop }) => {
-    if (isDesktop) {
-      return `right: 30px;
-    `
-    } else {
-      return `right: -180px;
-    `
-    }
-  }}
-`
 const Container = styled.div`
   position: relative;
   width: 100%;
@@ -180,16 +168,4 @@ const Svg = styled.svg`
   @media (max-width: 500px) {
     height: 95vh;
   }
-`
-const ClearBtn = styled.button`
-  border: 1px solid lightsteelblue;
-  border-radius: 4px;
-  cursor: pointer;
-  height: 40px;
-  width: 200px;
-  font-size: 1rem;
-  background: white;
-  color: lightsteelblue;
-  outline: none;
-  margin-top: 50px;
 `

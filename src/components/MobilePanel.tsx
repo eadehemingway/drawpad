@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react"
-import * as d3 from "d3"
+import React, { useState } from "react"
 import { BallColorPanel } from "../components/BallColorPanel.tsx"
 import arrow from "../assets/arrow.png"
 
 import styled from "styled-components"
-import paintbrush from "../assets/paintbrush.png"
 import { IncreaseDecreasePanel } from "../components/IncreaseDecreasePanel"
 
 export default function MobilePanel({
@@ -22,7 +20,6 @@ export default function MobilePanel({
   function toggleDrawer() {
     setDrawerOpen(!drawerOpen)
   }
-  console.log(drawerOpen)
   return (
     <PanelWrapper drawerOpen={drawerOpen}>
       <Open drawerOpen={drawerOpen} onClick={toggleDrawer} src={arrow} />{" "}
