@@ -2,16 +2,23 @@ import React from "react"
 import styled from "styled-components"
 
 export const BallColorPanel = ({ color, changeColor }) => {
-  const colourDictionary = ["pink", "salmon", "orange", "coral", "steelblue"]
+  const colourDictionary = [
+    { name: "pink", css: "pink" },
+    { name: "salmon", css: "salmon" },
+    { name: "orange", css: "orange" },
+    { name: "grey blue", css: "steelblue" },
+    { name: "light blue", css: "#99b3ff" },
+  ]
 
   return (
     <ColorPanel>
       {colourDictionary.map(c => {
-        const selected = color === c
+        const { name, css } = c
+        const selected = color === css
         return (
-          <Color selected={selected} onClick={() => changeColor(c)}>
-            <Circle style={{ background: c }} />
-            <PStyled>{c}</PStyled>
+          <Color selected={selected} onClick={() => changeColor(css)}>
+            <Circle style={{ background: css }} />
+            <PStyled>{name}</PStyled>
           </Color>
         )
       })}
