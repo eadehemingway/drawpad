@@ -54,6 +54,7 @@ const PanelWrapper = styled.div`
 `
 
 const ClearBtn = styled.button`
+  font-family: Major Mono;
   border: 1px solid lightsteelblue;
   border-radius: 4px;
   cursor: pointer;
